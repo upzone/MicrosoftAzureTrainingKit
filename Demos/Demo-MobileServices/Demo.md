@@ -40,6 +40,14 @@ In order to execute this demo you need to set up your environment. The following
 
 You need a Mac computer with iOS 7.0 in order to run the iOS client using Xamarin. Make sure **XCode**, **Git** and **Xamarin for iOS** are installed on the box.
 
+> **Note:** Due you´re downloading this files from internet some .ps1  scripts file will not run properly until you unlock it. To unlock them for each file listed bellow goto file properties dialog and press the unlock button, this button only appears when a script or executable file is locked for execution.
+* Setup\cleanup.ps1
+* Setup\tasks\installCodeSnippets.ps1
+* Setup\tasks\progress-functions.ps1
+* Setup\tasks\updateConfig.ps1
+* Setup\tasks\updatePlist.ps1
+
+
 #### Task 1 - Creating an Office 365 Subscription ####
 
 If you do not have an Office 365 subscription you can do one of the following:
@@ -113,31 +121,24 @@ Once you finish signing up for your **Office 365** subscription, follow these st
 1. Open the application manifest file with **Visual Studio**. At the top of the file, find the app permissions line.
 
 	````JSON
-	"appPermissions": [],
+	"oauth2Permissions": [],
 	````
 
 1. Replace that line with the following app permissions and save the file.
 
 	````JSON
-	"appPermissions": [
-	    {
-		"claimValue": "user_impersonation",
-		"description": "Allow the application access to the mobile service",
-		"directAccessGrantTypes": [],
-		"displayName": "Have full access to the mobile service",
-		"impersonationAccessGrantTypes": [
-		    {
-			"impersonated": "User",
-			"impersonator": "Application"
-		    }
-		],
-		"isDisabled": false,
-		"origin": "Application",
-		"permissionId": "b69ee3c9-c40d-4f2a-ac80-961cd1534e40",
-		"resourceScopeType": "Personal",
-		"userConsentDescription": "Allow the application full access to the mobile service on your behalf",
-		"userConsentDisplayName": "Have full access to the mobile service"
-	    }
+	"oauth2Permissions": [
+		{
+		    "adminConsentDescription": "Allow the application access to the mobile service",
+		    "adminConsentDisplayName": "Have full access to the mobile service",
+		    "id": "b69ee3c9-c40d-4f2a-ac80-961cd1534e40",
+		    "isEnabled": true,
+		    "origin": "Application",
+		    "type": "User",
+		    "userConsentDescription": "Allow the application full access to the mobile service on your behalf",
+		    "userConsentDisplayName": "Have full access to the mobile service",
+		    "value": "user_impersonation"
+		}
 	],
 	````
 	
@@ -191,7 +192,7 @@ Once you finish signing up for your **Office 365** subscription, follow these st
 
 	![Copying the Client ID](Images/copying-the-client-id.png?raw=true)
 
-1. In the **Redirect URIs** section, add the Mobile Services URL. E.g.: https://{mobileservice-name}.azure-mobile.net/.
+
 	
 1. Scroll down to the **permissions to other applications** section and grant full access to the mobile service application that you registered earlier. Click **Save**
 
@@ -207,7 +208,7 @@ Once you finish signing up for your **Office 365** subscription, follow these st
 
 	* **SharePointUri**: the SharePoint user's personal site targeting the API address. The URL usually has the following form **https://{domain}-my.sharepoint.com/personal/{username}_{domain}_onmicrosoft_com/_api/web**. For example: https://dpe-my.sharepoint.com/personal/admin_dpe_onmicrosoft_com/_api/web.
 	* **SharePointResource**: the base URL of SharePoint's Personal sites collection. E.g.: https://{domain}-my.sharepoint.com
-	* **Authority**: the Azure AD authority. Use https://login.windows.net/common/oauth2/authorize
+	* **Authority**: the Azure AD authority. Use https://login.windows.net/{domain}.onmicrosoft.com
 	* **ActiveDirectoryClientId**: the Id of the Mobile Service application registered in the Azure AD
 	* **ActiveDirectoryClientSecret**: the secret of the Mobile Service application registered in the Azure AD
 
@@ -219,7 +220,7 @@ Once you finish signing up for your **Office 365** subscription, follow these st
 
 1. Update the values under **clientSettings** in the XML file to configure your solutions:
 
-	* **AadAuthority**: the Azure AD authority. Use https://login.windows.net/common/oauth2/authorize
+	* **AadAuthority**: the Azure AD authority. Use https://login.windows.net/{domain}.onmicrosoft.com
 	* **AadRedirectResourceURI**: the Mobile Service AAD login URI. You can find this value under **Azure Active Directory** in your Mobile Service's **Identity** tab
 	* **AppRedirectLocation**: the Mobile Service URI
 	* **AadClientId**: the Id of your native client app registered in your AD
