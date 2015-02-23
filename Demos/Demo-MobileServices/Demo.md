@@ -68,6 +68,8 @@ Once you finish signing up for your **Office 365** subscription, follow these st
 
 	![SharePoint My Site](Images/sharepoint-my-site.png?raw=true)
 	
+1. For this Demo it's very important you name your personal Document Library "Documents" regardless the language of your site. The library is located in https://{domain}-my.sharepoint.com/personal/{user}_{domain}_onmicrosoft_com . In the ribbon goto Library, then in right side you can find "Library Settings" button, click on it will redirect to Settings page where  you can change list name easily.
+
 #### Task 2 - Setting Azure + Office 365 Subscription ####
 
 > **Note:** If you have a MSDN subscription, a free Azure subscription is included. Go to the msdn.com subscription dashboard and follow the **Activate Microsoft Azure** option.
